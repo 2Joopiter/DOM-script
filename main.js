@@ -2,59 +2,26 @@ const btns = document.querySelectorAll('.list1 li');
 console.log(btns);
 
 /*
-  DOM (Document Object Model) : wed Api
-  : 브라우저가 HTML 태그를 해석해서 렌더링을 할 때 자바스크립트로 하여금 생성된 요소를 제어할 수 있도록 객체형태로 만들어주는 API (Application Programing Interface; 프로그래밍 인터페이스)
-*/
-console.dir(btns[0]); // 객체형태로 구조를 볼 수 있음
-
-/*
-btns[0].onclick = () => {
-	console.log('button1');
-};
-
-이 양식은 덮어쓰기가 가능해서 권장되지 않음
+자바스크립트의 style 제어
+-자바스크립트는 html, js 파일 외에는 접근권한이 없음
+-그래서 style 변경시 css 파일이 변경되는 게 아니라 html 요소에 inline형태로 스타일을 강제 추가 해주는 것(기존값 덮어쓰기)
 */
 
-/*
-btns[0].addEventListener('click', () => {
-	console.log('엄청 중요한 작업');
-});
+const box = document.querySelector('.box'); // 어떤것을 제어할건지 지정해서 불러오는 함수
+
+console.dir(box);
 
 btns[0].addEventListener('click', () => {
-	console.log('실수로 연결한 쓸데없는 작업');
+	box.style.backgroundColor = 'hotpink';
+	console.dir(box);
 });
 
-*/
-
-//가급적이면 addEventListener를 이용
-
-//MISSION. 3개의 btns 요소를 forEach로 반복을 돌면서 각 버튼 클릭시 console.log(button1~3)까지 각각 찍히도록 만들기.
-
-/*
-btns.forEach((txt, index) => {
-	console.log(btns[index]);
-});
-
-function msg(btns)
-*/
-
-/*
-btns[0].addEventListener('click', () => {
-	console.log('button1');
-});
+//자바스크립트로 기존 스타일을 동적으로 덮어쓰는 것이 아닌 기존에 작업한 원래 스타일값을 css로 가져오는 것은 불가능(접근권한이 없기 때문)
+//자바스크립트가 역으로 화면에 출력되고 있는 결과물을 다시 수치적으로 재계산해서 가져옴
 
 btns[1].addEventListener('click', () => {
-	console.log('button2');
+	console.log(getComputedStyle(box).width);
+	console.log(getComputedStyle(box).backgroundColor);
 });
 
-btns[2].addEventListener('click', () => {
-	console.log('button3');
-});
-
-*/
-
-btns.forEach((btn, index) => {
-	btn.addEventListener('click', () => {
-		console.log(`button${index + 1}`);
-	});
-});
+//margin에 %를 쓰면 UI가 깨짐. 가능하면 margin, padding에는 %는 쓰지 말고 vw는 가능
